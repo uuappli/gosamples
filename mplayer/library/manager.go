@@ -1,6 +1,9 @@
 package library
 
-import "errors"
+import (
+	"errors"
+	"strconv"
+)
 
 type MusicEntry struct {
 	Id     string
@@ -48,12 +51,21 @@ func (m *MusicManager) Add(music *MusicEntry) {
 	m.musics = append(m.musics, *music)
 }
 
-func (m *MusicManager) Remove(index int) *MusicEntry {
-	if index < 0 || index > len(m.musics) || len(m.musics) == 0 {
+
+
+func (m *MusicManager) Remove(name string) *MusicEntry {
+	if name == "" || len(m.musics) == 0 {
 		return nil
 	}
-
-	removeMusic := &m.musics[index]
+	removeMusic := &MusicEntry{}
+	index := 0
+	for _, n := range m.musics {
+		if n.Name == name {
+			removeMusic = &n
+			id, _ := strconv.Atoi(n.Id)
+			index = id - 1
+		}
+	}
 
 	if index == 0 {
 		if len(m.musics) == 1 {

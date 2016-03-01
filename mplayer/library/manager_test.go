@@ -12,7 +12,7 @@ func TestOps(t *testing.T) {
 	}
 
 	m0 := &MusicEntry{"1", "My Heart Will Go On", "Celin Dion", "http://asfaf.com", "MP3"}
-	mm.add(m0)
+	mm.Add(m0)
 
 	if mm.Len() != 1 {
 		t.Error("MusicManager Add failed")
@@ -29,7 +29,7 @@ func TestOps(t *testing.T) {
 		t.Error("MusicManager Get Failed", err)
 	}
 
-	m = mm.Remove(0)
+	m = mm.Remove(m0.Name)
 
 	if m == nil || mm.Len() != 0 {
 		t.Error("MusicManager Remove Failed")

@@ -32,8 +32,7 @@ func handleLibCommands(tokens []string) {
 		}
 	case "remove":
 		if len(tokens) == 3 {
-			i, _ := strconv.Atoi(tokens[2])
-			lib.Remove(i)
+			lib.Remove(tokens[2])
 
 		} else {
 			fmt.Println("USAGE: lib remove <id>")
@@ -55,7 +54,7 @@ func handlePlayCommand(tokens []string) {
 		return
 	}
 
-	mp.Play(e.Source, e.Type)
+	go mp.Play(e.Source, e.Type)
 }
 
 func main() {
