@@ -16,7 +16,7 @@ func (client *CenterClient) AddPlayer(player *Player) error {
 		return err
 	}
 
-	resp, err := client.Call("addplayer", strign(b))
+	resp, err := client.Call("addplayer", string(b))
 	if err != nil && resp.Code == "200" {
 		return nil
 	}
@@ -36,7 +36,7 @@ func (client *CenterClient) RemovePlayer(name string) error {
 func (client *CenterClient) ListPlayer(params string) (ps []*Player, err error) {
 	resp, _ := client.Call("listplayer", params)
 	if resp.Code != "200" {
-		err = errors.New(ret.Code)
+		err = errors.New(resp.Code)
 		return
 	}
 
@@ -51,7 +51,7 @@ func (client *CenterClient) Broadcast(message string) error {
 	if err != nil {
 		return err
 	}
-	resp, _ := client.Call("broadcast", strign(b))
+	resp, _ := client.Call("broadcast", string(b))
 	if resp.Code == "200" {
 		return nil
 	}
